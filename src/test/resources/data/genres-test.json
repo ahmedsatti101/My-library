@@ -1,0 +1,44 @@
+{
+  "genres": [
+    {
+      "genreId": 1,
+      "name": "Fantasy"
+    },
+    {
+      "genreId": 2,
+      "name": "Science Fiction"
+    },
+    {
+      "genreId": 3,
+      "name": "Mystery"
+    },
+    {
+      "genreId": 4,
+      "name": "Romance"
+    },
+    {
+      "genreId": 5,
+      "name": "Thriller"
+    },
+    {
+      "genreId": 6,
+      "name": "Historical Fiction"
+    },
+    {
+      "genreId": 7,
+      "name": "Non-Fiction"
+    },
+    {
+      "genreId": 8,
+      "name": "Horror"
+    },
+    {
+      "genreId": 9,
+      "name": "Biography"
+    },
+    {
+      "genreId": 10,
+      "name": "Self-Help"
+    }
+  ]
+}

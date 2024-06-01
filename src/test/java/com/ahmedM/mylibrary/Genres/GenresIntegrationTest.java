@@ -3,7 +3,6 @@ package com.ahmedM.mylibrary.Genres;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
@@ -22,9 +21,6 @@ public class GenresIntegrationTest {
     private String api = "http://localhost";
 
     private static RestTemplate restTemplate;
-
-    @Autowired
-    private TestGenresRepository testGenresRepository;
 
     @BeforeAll
     public static void init() {

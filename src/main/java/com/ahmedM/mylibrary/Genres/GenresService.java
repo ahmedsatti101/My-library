@@ -17,10 +17,6 @@ public class GenresService {
     }
 
     public Optional<Genres> getGenreById(Integer id) {
-        if (genreRepository.findById(id).isPresent()) {
-            return genreRepository.findById(id);
-        } else {
-            throw new RuntimeException("Could not find genre.");
-        }
+        return genreRepository.findById(id);
     }
 }

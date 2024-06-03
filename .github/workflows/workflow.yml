@@ -17,9 +17,6 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
-          MYSQL_DATABASE: ${{secrets.MYSQL_DATABASE}}
-          MYSQL_USER: ${{secrets.MYSQL_USER}}
-          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
         ports:
           - 3306:3306
           
@@ -47,7 +44,7 @@ jobs:
       - name: Wait for MySQL
         run: |
           for i in {30..0}; do
-            if echo 'SELECT 1' | mysql -h 127.0.0.1 -P 3306 -u springuser -p ThePassword mylibrarytest &> /dev/null; then
+            if echo 'SELECT 1' | mysql -h 127.0.0.1 -P 3306 -u ahmed-mohamed -p ${{secrets.MYSQL_ROOT_PASSWORD}} mylibrary &> /dev/null; then
               break
             fi
             echo 'MySQL init process in progress...'

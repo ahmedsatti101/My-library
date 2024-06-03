@@ -1,11 +1,10 @@
 package com.ahmedM.mylibrary.Genres;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/genres")
@@ -17,5 +16,10 @@ public class GenresController {
     @GetMapping
     public List<Genres> findAllGenres() {
         return genresService.getAllGenres();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Genres> getGenreById(@PathVariable Integer id) {
+        return genresService.getGenreById(id);
     }
 }

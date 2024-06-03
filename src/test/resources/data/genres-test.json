@@ -14,31 +14,151 @@
     },
     {
       "genreId": 4,
-      "name": "Romance"
-    },
-    {
-      "genreId": 5,
       "name": "Thriller"
     },
     {
+      "genreId": 5,
+      "name": "Romance"
+    },
+    {
       "genreId": 6,
-      "name": "Historical Fiction"
+      "name": "Western"
     },
     {
       "genreId": 7,
-      "name": "Non-Fiction"
+      "name": "Dystopian"
     },
     {
       "genreId": 8,
-      "name": "Horror"
+      "name": "Contemporary"
     },
     {
       "genreId": 9,
-      "name": "Biography"
+      "name": "Historical Fiction"
     },
     {
       "genreId": 10,
+      "name": "Horror"
+    },
+    {
+      "genreId": 11,
+      "name": "Literary Fiction"
+    },
+    {
+      "genreId": 12,
+      "name": "Magical Realism"
+    },
+    {
+      "genreId": 13,
+      "name": "Paranormal"
+    },
+    {
+      "genreId": 14,
+      "name": "Graphic Novel"
+    },
+    {
+      "genreId": 15,
+      "name": "Memoir"
+    },
+    {
+      "genreId": 16,
+      "name": "Biography"
+    },
+    {
+      "genreId": 17,
       "name": "Self-Help"
+    },
+    {
+      "genreId": 18,
+      "name": "True Crime"
+    },
+    {
+      "genreId": 19,
+      "name": "Essay"
+    },
+    {
+      "genreId": 20,
+      "name": "Guide"
+    },
+    {
+      "genreId": 21,
+      "name": "Travel"
+    },
+    {
+      "genreId": 22,
+      "name": "Humor"
+    },
+    {
+      "genreId": 23,
+      "name": "Children's"
+    },
+    {
+      "genreId": 24,
+      "name": "Young Adult"
+    },
+    {
+      "genreId": 25,
+      "name": "New Adult"
+    },
+    {
+      "genreId": 26,
+      "name": "Religion"
+    },
+    {
+      "genreId": 27,
+      "name": "Science"
+    },
+    {
+      "genreId": 28,
+      "name": "History"
+    },
+    {
+      "genreId": 29,
+      "name": "Poetry"
+    },
+    {
+      "genreId": 30,
+      "name": "Classic"
+    },
+    {
+      "genreId": 31,
+      "name": "Cookbook"
+    },
+    {
+      "genreId": 32,
+      "name": "Art"
+    },
+    {
+      "genreId": 33,
+      "name": "Comic Book"
+    },
+    {
+      "genreId": 34,
+      "name": "Drama"
+    },
+    {
+      "genreId": 35,
+      "name": "Short Story"
+    },
+    {
+      "genreId": 36,
+      "name": "Adventure"
+    },
+    {
+      "genreId": 37,
+      "name": "Crime"
+    },
+    {
+      "genreId": 38,
+      "name": "Suspense"
+    },
+    {
+      "genreId": 39,
+      "name": "Mythology"
+    },
+    {
+      "genreId": 40,
+      "name": "Folklore"
     }
   ]
 }

@@ -9,6 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -29,13 +30,23 @@ public class GenresIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        api = api.concat(":").concat(port+"").concat("/api/genres");
+        api = api.concat(":").concat(port + "").concat("/api/genres");
     }
 
     @Test
     public void getAllGenres() {
         List<Genres> genres = restTemplate.getForObject(api, List.class);
         assertNotNull(genres);
-        assertEquals(10, genres.size());
+        assertEquals(40, genres.size());
+    }
+
+    @Test
+    public void getGenreById() {
+        Genres genre = restTemplate.getForObject(api + "/{id}", Genres.class, 1);
+        assertAll(
+                () -> assertEquals(1, genre.getGenreId()),
+                () -> assertNotNull(genre),
+                () -> assertEquals("Fantasy", genre.getName())
+        );
     }
 }

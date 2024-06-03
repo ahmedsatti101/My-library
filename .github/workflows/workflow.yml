@@ -32,6 +32,15 @@ jobs:
         with:
           java-version: ${{matrix.java}}
 
+      - name: Setup MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3306
+          mysql database: 'testdb'
+          mysql root password: ${{secrets.MYSQL_ROOT_PASSWORD}}
+          mysql user: 'testuser'
+          mysql password: 'testpw'
+
       - name: Install Maven
         run: sudo apt-get update && sudo apt-get install -y maven
 
@@ -42,16 +51,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
-      - name: Wait for MySQL
-        run: |
-          for i in {30..0}; do
-            if echo 'SELECT 1' | mysql -h 127.0.0.1 -P 3306 -u mysql -p ${{secrets.MYSQL_ROOT_PASSWORD}} mylibrary &> /dev/null; then
-              break
-            fi
-            echo 'MySQL init process in progress...'
-            sleep 1
-          done
 
       - name: Install dependencies
         run: mvn install -DskipTests=true

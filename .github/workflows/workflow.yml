@@ -18,7 +18,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
         ports:
-          - 3306:3306
+          - 3307:3307
 
     steps:
       - name: Checkout code
@@ -43,7 +43,7 @@ jobs:
       - name: Wait for MySQL
         run: |
           for i in {30..0}; do
-            if echo 'SELECT 1' | mysql -h 127.0.0.1 -P 3306 -u springuser -p ${{secrets.MYSQL_ROOT_PASSWORD}} mylibrary &> /dev/null; then
+            if echo 'SELECT 1' | mysql -h 127.0.0.1 -P 3307 -u springuser -p ${{secrets.MYSQL_ROOT_PASSWORD}} mylibrary &> /dev/null; then
               break
             fi
             echo 'MySQL init process in progress...'

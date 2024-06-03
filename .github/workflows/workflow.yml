@@ -16,9 +16,10 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_DATABASE: mylibrarytest
-          MYSQL_USER: springuser
-          MYSQL_PASSWORD: ThePassword
+          MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
+          MYSQL_DATABASE: ${{secrets.MYSQL_DATABASE}}
+          MYSQL_USER: ${{secrets.MYSQL_USER}}
+          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
         ports:
           - 3306:3306
           

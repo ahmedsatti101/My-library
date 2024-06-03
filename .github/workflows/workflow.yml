@@ -21,7 +21,6 @@ jobs:
           MYSQL_PASSWORD: ThePassword
         ports:
           - 3306:3306
-        options: >-
           
 
     steps:

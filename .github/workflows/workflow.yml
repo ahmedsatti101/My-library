@@ -10,7 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [22]
+        java: [17, 22]
+
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_DATABASE: mylibrarytest
+          MYSQL_USER: springuser
+          MYSQL_PASSWORD: ThePassword
+        ports:
+          - 3306:3306
+        options: >-
+          
 
     steps:
       - name: Checkout code
@@ -31,6 +43,16 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+
+      - name: Wait for MySQL
+        run: |
+          for i in {30..0}; do
+            if echo 'SELECT 1' | mysql -h 127.0.0.1 -P 3306 -u springuser -p ThePassword mylibrarytest &> /dev/null; then
+              break
+            fi
+            echo 'MySQL init process in progress...'
+            sleep 1
+          done
 
       - name: Install dependencies
         run: mvn install -DskipTests=true

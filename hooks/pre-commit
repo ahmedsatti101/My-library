@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Run your test command here
+echo "Running tests..."
+mvn test
+
+# Capture the exit status of the test command
+RESULT=$?
+
+# If the tests fail, exit with a non-zero status to abort the commit
+if [ $RESULT -ne 0 ]; then
+  echo "Tests failed, aborting commit."
+  exit 1
+fi
+
+# If tests pass, allow the commit
+echo "Tests passed, proceeding with commit."
+exit 0

@@ -1,0 +1,104 @@
+{
+  "authors": [
+    {
+      "authorId": 1,
+      "name": "Collen Hover",
+      "avatar": ""
+    },
+    {
+      "authorId": 2,
+      "name": "J. K. Rowling",
+      "avatar": ""
+    },
+    {
+      "authorId": 3,
+      "name": "J. R. R. Tolkien",
+      "avatar": ""
+    },
+    {
+      "authorId": 4,
+      "name": "George R. R. Martin",
+      "avatar": ""
+    },
+    {
+      "authorId": 5,
+      "name": "Hannah Baker",
+      "avatar": ""
+    },
+    {
+      "authorId": 6,
+      "name": "John Smith",
+      "avatar": ""
+    },
+    {
+      "authorId": 7,
+      "name": "Jane Doe",
+      "avatar": ""
+    },
+    {
+      "authorId": 8,
+      "name": "Mark Twain",
+      "avatar": ""
+    },
+    {
+      "authorId": 9,
+      "name": "Alice Smith",
+      "avatar": ""
+    },
+    {
+      "authorId": 10,
+      "name": "Bob Johnson",
+      "avatar": ""
+    },
+    {
+      "authorId": 11,
+      "name": "Charlie Brown",
+      "avatar": ""
+    },
+    {
+      "authorId": 12,
+      "name": "David Lee",
+      "avatar": ""
+    },
+    {
+      "authorId": 13,
+      "name": "Emily Chen",
+      "avatar": ""
+    },
+    {
+      "authorId": 14,
+      "name": "Frank Davis",
+      "avatar": ""
+    },
+    {
+      "authorId": 15,
+      "name": "Grace Wang",
+      "avatar": ""
+    },
+    {
+      "authorId": 16,
+      "name": "Henry Lee",
+      "avatar": ""
+    },
+    {
+      "authorId": 17,
+      "name": "Ivy Chen",
+      "avatar": ""
+    },
+    {
+      "authorId": 18,
+      "name": "Jack Smith",
+      "avatar": ""
+    },
+    {
+      "authorId": 19,
+      "name": "Karen Johnson",
+      "avatar": ""
+    },
+    {
+      "authorId": 20,
+      "name": "Sarah Smith",
+      "avatar": ""
+    }
+  ]
+}

@@ -1,7 +1,6 @@
 package com.ahmedM.mylibrary.Genres;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Profile;
 
 @Entity
 @Table(name = "genres")

@@ -1,9 +1,6 @@
-name: Run workflow on push
+name: Run workflow on pull requests
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main

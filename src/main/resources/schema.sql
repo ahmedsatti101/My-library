@@ -16,10 +16,10 @@ CREATE TABLE authors (
 
 CREATE TABLE books (
     book_id SERIAL PRIMARY KEY,
-    title VARCHAR(250),
-    author_id INT NOT NULL REFERENCES Authors(authorId),
-    genre_id INT NOT NULL REFERENCES Genres(genreId),
+    title VARCHAR(250) NOT NULL,
+    author_id INT NOT NULL REFERENCES authors(author_id),
+    genre_id INT NOT NULL REFERENCES genres(genre_id),
     cover VARCHAR(250),
-    `read` BOOL,
-    description VARCHAR(250)
+    is_read BOOL,
+    description VARCHAR(250) NOT NULL
 );

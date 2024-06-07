@@ -10,7 +10,7 @@ public class Genres {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int genreId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     public Genres(int genreId, String genreName) {

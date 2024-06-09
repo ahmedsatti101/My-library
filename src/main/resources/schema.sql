@@ -1,10 +1,10 @@
+DROP TABLE IF EXISTS books_genres;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS authors;
 DROP TABLE IF EXISTS genres;
 
-
 CREATE TABLE genres (
-    genre_id SERIAL PRIMARY KEY,
+    genre_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(250) NOT NULL
 );
 
@@ -15,11 +15,18 @@ CREATE TABLE authors (
 );
 
 CREATE TABLE books (
-    book_id SERIAL PRIMARY KEY,
+    book_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(250) NOT NULL,
     author_id INT NOT NULL REFERENCES authors(author_id),
-    genre_id INT NOT NULL REFERENCES genres(genre_id),
     cover VARCHAR(250),
     is_read BOOL,
     description VARCHAR(250) NOT NULL
+);
+
+CREATE TABLE books_genres (
+    book_id INT NOT NULL,
+    genre_id INT NOT NULL,
+    PRIMARY KEY (book_id, genre_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id),
+    FOREIGN KEY (genre_id) REFERENCES genres(genre_id)
 );

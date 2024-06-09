@@ -2,10 +2,10 @@ package com.ahmedM.mylibrary.Books;
 
 import com.ahmedM.mylibrary.Authors.Authors;
 import com.ahmedM.mylibrary.Genres.Genres;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -27,27 +27,29 @@ public class Books {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private Authors author;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "genre_id", nullable = false)
-    private Genres genre;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "books_genres",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id")}
+    )
+    Set<Genres> genres = new HashSet<>();
 
     public Books() {
     }
 
-    public Books(int bookId, String title, String cover, boolean isRead, String description, Authors author, Genres genre) {
+    public Books(int bookId, String title, String cover, boolean isRead, String description, Authors author, Set<Genres> genre) {
         this.bookId = bookId;
         this.title = title;
         this.cover = cover;
         this.isRead = isRead;
         this.description = description;
         this.author = author;
-        this.genre = genre;
+        this.genres = genre;
     }
 
     public int getBookId() {
@@ -98,21 +100,24 @@ public class Books {
         this.author = author;
     }
 
-    public Genres getGenre() {
-        return genre;
+    public Set<Genres> getGenres() {
+        return genres;
     }
 
-    public void setGenre(Genres genre) {
-        this.genre = genre;
+    public void setGenres(Set<Genres> genres) {
+        this.genres = genres;
     }
 
-    @JsonProperty("authorName")
-    public String getAuthorName() {
-        return author != null ? author.getName() : null;
-    }
-
-    @JsonProperty("genreName")
-    public String getGenreName() {
-        return genre != null ? genre.getName() : null;
+    @Override
+    public String toString() {
+        return "Books{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", cover='" + cover + '\'' +
+                ", isRead=" + isRead +
+                ", description='" + description + '\'' +
+                ", author=" + author +
+                ", genres=" + genres +
+                '}';
     }
 }

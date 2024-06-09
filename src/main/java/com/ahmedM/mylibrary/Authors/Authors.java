@@ -1,6 +1,9 @@
 package com.ahmedM.mylibrary.Authors;
 
+import com.ahmedM.mylibrary.Books.Books;
 import jakarta.persistence.*;
+
+import java.util.*;
 
 @Entity
 @Table(name = "authors")
@@ -15,6 +18,9 @@ public class Authors {
 
     @Column(name = "avatar")
     private String avatar;
+
+    @OneToMany(mappedBy = "author")
+    private Set<Books> books;
 
     public Authors(int id, String name, String avatar) {
         this.authorId = id;
@@ -47,5 +53,13 @@ public class Authors {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    @Override
+    public String toString() {
+        return "Authors{" +
+                "authorId=" + authorId +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

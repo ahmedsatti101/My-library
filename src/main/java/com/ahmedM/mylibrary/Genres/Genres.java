@@ -1,6 +1,10 @@
 package com.ahmedM.mylibrary.Genres;
 
+import com.ahmedM.mylibrary.Books.Books;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "genres")
@@ -12,6 +16,9 @@ public class Genres {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @ManyToMany(mappedBy = "genres")
+    private Set<Books> books = new HashSet<>();
 
     public Genres(int genreId, String genreName) {
         this.genreId = genreId;
@@ -36,5 +43,22 @@ public class Genres {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Genres{" +
+                "genreId=" + genreId +
+                ", name='" + name + '\'' +
+                ", books=" + books +
+                '}';
+    }
+
+    public Set<Books> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Books> books) {
+        this.books = books;
     }
 }

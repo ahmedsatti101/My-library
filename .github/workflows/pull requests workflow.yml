@@ -18,7 +18,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
         ports:
-          - 3307:3307
+          - 3306:3306
 
     steps:
       - name: Checkout code
@@ -32,7 +32,7 @@ jobs:
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
-          host port: 3307
+          host port: 3306
           mysql database: 'mylibrarytest'
           mysql root password: ${{secrets.MYSQL_ROOT_PASSWORD}}
           mysql user: 'springuser'

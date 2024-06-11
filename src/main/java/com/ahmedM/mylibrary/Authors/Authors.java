@@ -1,6 +1,9 @@
 package com.ahmedM.mylibrary.Authors;
 
+import com.ahmedM.mylibrary.Books.Books;
 import jakarta.persistence.*;
+
+import java.util.*;
 
 @Entity
 @Table(name = "authors")
@@ -10,7 +13,7 @@ public class Authors {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int authorId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "avatar")
@@ -47,5 +50,13 @@ public class Authors {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    @Override
+    public String toString() {
+        return "Authors{" +
+                "authorId=" + authorId +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

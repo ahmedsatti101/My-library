@@ -10,7 +10,7 @@ public class Genres {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int genreId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     public Genres(int genreId, String genreName) {
@@ -36,5 +36,13 @@ public class Genres {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Genres{" +
+                "genreId=" + genreId +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

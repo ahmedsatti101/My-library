@@ -1,0 +1,364 @@
+{
+  "books": [
+    {
+      "bookId": 1,
+      "title": "Whispers of the Wind",
+      "authorId": 1,
+      "genreId": 1,
+      "cover": "",
+      "isRead": false,
+      "description": "A tale of fantasy and adventure."
+    },
+    {
+      "bookId": 2,
+      "title": "Journey to the Stars",
+      "authorId": 2,
+      "genreId": 2,
+      "cover": "",
+      "isRead": true,
+      "description": "Exploring the universe beyond."
+    },
+    {
+      "bookId": 3,
+      "title": "Mystery at Midnight",
+      "authorId": 3,
+      "genreId": 3,
+      "cover": "",
+      "isRead": false,
+      "description": "A gripping mystery novel."
+    },
+    {
+      "bookId": 4,
+      "title": "Thrill of the Chase",
+      "authorId": 4,
+      "genreId": 4,
+      "cover": "",
+      "isRead": true,
+      "description": "A thrilling cat and mouse game."
+    },
+    {
+      "bookId": 5,
+      "title": "Love in the Time of Magic",
+      "authorId": 5,
+      "genreId": 5,
+      "cover": "",
+      "isRead": false,
+      "description": "A romantic fantasy."
+    },
+    {
+      "bookId": 6,
+      "title": "Wild West Adventures",
+      "authorId": 6,
+      "genreId": 6,
+      "cover": "",
+      "isRead": true,
+      "description": "Adventures in the wild west."
+    },
+    {
+      "bookId": 7,
+      "title": "Dystopian Dreams",
+      "authorId": 7,
+      "genreId": 7,
+      "cover": "",
+      "isRead": false,
+      "description": "A dark vision of the future."
+    },
+    {
+      "bookId": 8,
+      "title": "Modern Lives",
+      "authorId": 8,
+      "genreId": 8,
+      "cover": "",
+      "isRead": true,
+      "description": "Stories of contemporary life."
+    },
+    {
+      "bookId": 9,
+      "title": "Echoes of the Past",
+      "authorId": 9,
+      "genreId": 9,
+      "cover": "",
+      "isRead": false,
+      "description": "Historical fiction at its best."
+    },
+    {
+      "bookId": 10,
+      "title": "Haunted Hearts",
+      "authorId": 10,
+      "genreId": 10,
+      "cover": "",
+      "isRead": true,
+      "description": "A horror story to chill your bones."
+    },
+    {
+      "bookId": 11,
+      "title": "The Art of Words",
+      "authorId": 11,
+      "genreId": 11,
+      "cover": "",
+      "isRead": false,
+      "description": "A literary masterpiece."
+    },
+    {
+      "bookId": 12,
+      "title": "Magic in the Air",
+      "authorId": 12,
+      "genreId": 12,
+      "cover": "",
+      "isRead": true,
+      "description": "A magical realism story."
+    },
+    {
+      "bookId": 13,
+      "title": "Ghostly Encounters",
+      "authorId": 13,
+      "genreId": 13,
+      "cover": "",
+      "isRead": false,
+      "description": "Paranormal activities in a small town."
+    },
+    {
+      "bookId": 14,
+      "title": "Graphic Adventures",
+      "authorId": 14,
+      "genreId": 14,
+      "cover": "",
+      "isRead": true,
+      "description": "A graphic novel of epic proportions."
+    },
+    {
+      "bookId": 15,
+      "title": "Memoirs of a Nobody",
+      "authorId": 15,
+      "genreId": 15,
+      "cover": "",
+      "isRead": false,
+      "description": "An intriguing memoir."
+    },
+    {
+      "bookId": 16,
+      "title": "The Great Lives",
+      "authorId": 16,
+      "genreId": 16,
+      "cover": "",
+      "isRead": true,
+      "description": "Biographies of famous individuals."
+    },
+    {
+      "bookId": 17,
+      "title": "Path to Happiness",
+      "authorId": 17,
+      "genreId": 17,
+      "cover": "",
+      "isRead": false,
+      "description": "A self-help guide to happiness."
+    },
+    {
+      "bookId": 18,
+      "title": "Crime and Punishment",
+      "authorId": 18,
+      "genreId": 18,
+      "cover": "",
+      "isRead": true,
+      "description": "A true crime story."
+    },
+    {
+      "bookId": 19,
+      "title": "Thoughts on Life",
+      "authorId": 19,
+      "genreId": 19,
+      "cover": "",
+      "isRead": false,
+      "description": "A collection of essays."
+    },
+    {
+      "bookId": 20,
+      "title": "Traveler's Tales",
+      "authorId": 20,
+      "genreId": 21,
+      "cover": "",
+      "isRead": true,
+      "description": "Stories from around the world."
+    },
+    {
+      "bookId": 21,
+      "title": "Laugh Out Loud",
+      "authorId": 1,
+      "genreId": 22,
+      "cover": "",
+      "isRead": false,
+      "description": "A collection of humorous stories."
+    },
+    {
+      "bookId": 22,
+      "title": "Children's Corner",
+      "authorId": 2,
+      "genreId": 23,
+      "cover": "",
+      "isRead": true,
+      "description": "Tales for young readers."
+    },
+    {
+      "bookId": 23,
+      "title": "Young Hearts",
+      "authorId": 3,
+      "genreId": 24,
+      "cover": "",
+      "isRead": false,
+      "description": "A young adult novel."
+    },
+    {
+      "bookId": 24,
+      "title": "New Beginnings",
+      "authorId": 4,
+      "genreId": 25,
+      "cover": "",
+      "isRead": true,
+      "description": "A new adult romance."
+    },
+    {
+      "bookId": 25,
+      "title": "Spiritual Journey",
+      "authorId": 5,
+      "genreId": 26,
+      "cover": "",
+      "isRead": false,
+      "description": "A guide to spiritual awakening."
+    },
+    {
+      "bookId": 26,
+      "title": "Science Wonders",
+      "authorId": 6,
+      "genreId": 27,
+      "cover": "",
+      "isRead": true,
+      "description": "Exploring the wonders of science."
+    },
+    {
+      "bookId": 27,
+      "title": "History Revisited",
+      "authorId": 7,
+      "genreId": 28,
+      "cover": "",
+      "isRead": false,
+      "description": "A look at historical events."
+    },
+    {
+      "bookId": 28,
+      "title": "Poetic Expressions",
+      "authorId": 8,
+      "genreId": 29,
+      "cover": "",
+      "isRead": true,
+      "description": "A collection of poetry."
+    },
+    {
+      "bookId": 29,
+      "title": "Timeless Classics",
+      "authorId": 9,
+      "genreId": 30,
+      "cover": "",
+      "isRead": false,
+      "description": "A compilation of classic literature."
+    },
+    {
+      "bookId": 30,
+      "title": "Cooking with Love",
+      "authorId": 10,
+      "genreId": 31,
+      "cover": "",
+      "isRead": true,
+      "description": "Delicious recipes to try at home."
+    },
+    {
+      "bookId": 31,
+      "title": "Art and Soul",
+      "authorId": 11,
+      "genreId": 32,
+      "cover": "",
+      "isRead": false,
+      "description": "An exploration of art."
+    },
+    {
+      "bookId": 32,
+      "title": "Comic Chronicles",
+      "authorId": 12,
+      "genreId": 33,
+      "cover": "",
+      "isRead": true,
+      "description": "A comic book adventure."
+    },
+    {
+      "bookId": 33,
+      "title": "Dramatic Moments",
+      "authorId": 13,
+      "genreId": 34,
+      "cover": "",
+      "isRead": false,
+      "description": "A dramatic novel."
+    },
+    {
+      "bookId": 34,
+      "title": "Short Stories",
+      "authorId": 14,
+      "genreId": 35,
+      "cover": "",
+      "isRead": true,
+      "description": "A collection of short stories."
+    },
+    {
+      "bookId": 35,
+      "title": "Adventure Awaits",
+      "authorId": 15,
+      "genreId": 36,
+      "cover": "",
+      "isRead": false,
+      "description": "An epic adventure."
+    },
+    {
+      "bookId": 36,
+      "title": "Crime Scene",
+      "authorId": 16,
+      "genreId": 37,
+      "cover": "",
+      "isRead": true,
+      "description": "A crime thriller."
+    },
+    {
+      "bookId": 37,
+      "title": "Edge of Suspense",
+      "authorId": 17,
+      "genreId": 38,
+      "cover": "",
+      "isRead": false,
+      "description": "A suspenseful story."
+    },
+    {
+      "bookId": 38,
+      "title": "Mythical Tales",
+      "authorId": 18,
+      "genreId": 39,
+      "cover": "",
+      "isRead": true,
+      "description": "Stories of mythology."
+    },
+    {
+      "bookId": 39,
+      "title": "Folklore Fables",
+      "authorId": 19,
+      "genreId": 40,
+      "cover": "",
+      "isRead": false,
+      "description": "Folklore tales from around the world."
+    },
+    {
+      "bookId": 40,
+      "title": "The Unknown",
+      "authorId": 20,
+      "genreId": 1,
+      "cover": "",
+      "isRead": true,
+      "description": "A mysterious journey."
+    }
+  ]
+}

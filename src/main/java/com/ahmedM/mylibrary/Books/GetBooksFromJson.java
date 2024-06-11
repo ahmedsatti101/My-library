@@ -1,12 +1,8 @@
 package com.ahmedM.mylibrary.Books;
 
-import com.ahmedM.mylibrary.Authors.Authors;
-import com.ahmedM.mylibrary.Genres.GenreRepository;
-import com.ahmedM.mylibrary.Genres.Genres;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -41,17 +37,11 @@ public class GetBooksFromJson implements CommandLineRunner {
         for (JsonNode node : res) {
             books.add(createBooksFromNode(node));
         }
-        System.out.println(books);
-        System.out.println(res);
 
-//        booksRepository.create(createBooksFromNode(json));
+        booksRepository.saveAll(books);
     }
 
     private Books createBooksFromNode(JsonNode node) {
-        Authors bookAuthor = new Authors();
-        Set<Genres> bookGenre = new HashSet<>();
-        Genres genres = new Genres();
-
         String title = node.get("title").asText();
         int id = node.get("bookId").asInt();
         int authorId = node.get("authorId").asInt();
@@ -60,11 +50,7 @@ public class GetBooksFromJson implements CommandLineRunner {
         boolean isRead = node.get("isRead").asBoolean();
         String description = node.get("description").asText();
 
-        bookAuthor.setAuthorId(authorId);
-        genres.setGenreId(genreId);
-        bookGenre.add(genres);
-
-        return new Books(id, title, cover, isRead, description, bookAuthor, bookGenre);
+        return new Books(id, title, cover, isRead, description, authorId, genreId);
     }
 
     private JsonNode getNodes(JsonNode json) {

@@ -27,29 +27,23 @@ public class Books {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private Authors author;
+    @Column(name = "author_id", nullable = false)
+    private int authorId;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "books_genres",
-            joinColumns = {@JoinColumn(name = "book_id")},
-            inverseJoinColumns = {@JoinColumn(name = "genre_id")}
-    )
-    Set<Genres> genres = new HashSet<>();
+    @Column(name = "genre_id", nullable = false)
+    private int genreId;
 
     public Books() {
     }
 
-    public Books(int bookId, String title, String cover, boolean isRead, String description, Authors author, Set<Genres> genre) {
+    public Books(int bookId, String title, String cover, boolean isRead, String description, int authorId, int genreId) {
         this.bookId = bookId;
         this.title = title;
         this.cover = cover;
         this.isRead = isRead;
         this.description = description;
-        this.author = author;
-        this.genres = genre;
+        this.authorId = authorId;
+        this.genreId = genreId;
     }
 
     public int getBookId() {
@@ -92,20 +86,20 @@ public class Books {
         this.description = description;
     }
 
-    public Authors getAuthor() {
-        return author;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(Authors author) {
-        this.author = author;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
-    public Set<Genres> getGenres() {
-        return genres;
+    public int getGenreId() {
+        return genreId;
     }
 
-    public void setGenres(Set<Genres> genres) {
-        this.genres = genres;
+    public void setGenreId(int genreId) {
+        this.genreId = genreId;
     }
 
     @Override
@@ -116,8 +110,8 @@ public class Books {
                 ", cover='" + cover + '\'' +
                 ", isRead=" + isRead +
                 ", description='" + description + '\'' +
-                ", author=" + author +
-                ", genres=" + genres +
+                ", author=" + authorId +
+                ", genres=" + genreId +
                 '}';
     }
 }

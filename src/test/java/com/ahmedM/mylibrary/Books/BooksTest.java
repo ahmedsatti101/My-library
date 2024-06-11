@@ -1,13 +1,6 @@
 package com.ahmedM.mylibrary.Books;
 
-import com.ahmedM.mylibrary.Authors.Authors;
-import com.ahmedM.mylibrary.Genres.Genres;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.json.JSONArray;
-import org.json.JSONObject;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +10,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -40,21 +29,6 @@ public class BooksTest {
 
     private String api = "http://localhost";
 
-//    @BeforeAll
-//    public static void beforeAll() {
-//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//        session = sessionFactory.openSession();
-//        session.beginTransaction();
-//    }
-//
-//    @AfterAll
-//    public static void tearDown() {
-//        if (session != null) {
-//            session.getTransaction().commit();
-//            session.close();
-//        }
-//    }
-
     @BeforeEach
     public void setUp() {
         api = api.concat(":").concat(port + "").concat("/api/books");
@@ -71,8 +45,10 @@ public class BooksTest {
         MvcResult result = mockMvc.perform(get(api))
                 .andExpect(status().isOk())
                 .andReturn();
+        String content = result.getResponse().getContentAsString();
+        JSONArray array = new JSONArray(content);
 
-        assertNotNull(result.getResponse().getContentAsString());
-        assertEquals(40, result.getResponse().getContentLength());
+        assertNotNull(content);
+        assertEquals(40, array.length());
     }
 }

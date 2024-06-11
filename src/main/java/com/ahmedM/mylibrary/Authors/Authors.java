@@ -19,9 +19,6 @@ public class Authors {
     @Column(name = "avatar")
     private String avatar;
 
-    @OneToMany(mappedBy = "author")
-    private Set<Books> books;
-
     public Authors(int id, String name, String avatar) {
         this.authorId = id;
         this.name = name;

@@ -2,11 +2,11 @@ package com.ahmedM.mylibrary.Books;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/books")
@@ -27,5 +27,16 @@ public class BooksController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
         }
         return booksService.findBookById(id);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Books updateBook(@RequestBody Books books, @PathVariable int id) {
+        if (booksService.findBookById(id).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
+        }
+        booksService.updateIsRead(id, books);
+        return booksService.findBookById(id).get();
     }
 }

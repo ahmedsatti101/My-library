@@ -1,11 +1,6 @@
 package com.ahmedM.mylibrary.Books;
 
-import com.ahmedM.mylibrary.Authors.Authors;
-import com.ahmedM.mylibrary.Genres.Genres;
 import jakarta.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "books")

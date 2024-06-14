@@ -1,16 +1,20 @@
 package com.ahmedM.mylibrary.Books;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.*;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -23,6 +27,9 @@ public class BooksTest {
 
     @LocalServerPort
     private int port;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private String api = "http://localhost";
 
@@ -84,5 +91,68 @@ public class BooksTest {
     public void throwBadRequestIfIdIsNotANumber() throws Exception {
         mockMvc.perform(get(api + "/{id}", "banana"))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateIfBookWasRead() throws Exception {
+        HashMap<String, Boolean> update = new HashMap<>();
+        update.put("read", true);
+
+        MvcResult result = mockMvc.perform(patch(api + "/{id}", 23)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(update)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+        JSONObject jsonObject = new JSONObject(content);
+
+        assertTrue(jsonObject.getBoolean("read"));
+    }
+
+    @Test
+    public void updateIfBookWasNotRead() throws Exception {
+        HashMap<String, Boolean> update = new HashMap<>();
+        update.put("read", false);
+
+        MvcResult result = mockMvc.perform(patch(api + "/{id}", 2)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8")
+                        .content(objectMapper.writeValueAsString(update)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+        JSONObject jsonObject = new JSONObject(content);
+
+        assertFalse(jsonObject.getBoolean("read"));
+    }
+
+    @Test
+    public void throwErrorIfRequestBodyIsEmpty() throws Exception {
+        mockMvc.perform(patch(api + "/{id}", 17))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void patchRequest_throwBadRequestIfIdIsNotANumber() throws Exception {
+        mockMvc.perform(patch(api + "/{id}", "apple"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void patchRequest_throwNotFoundIfIdNotFound() throws Exception {
+        HashMap<String, Boolean> update = new HashMap<>();
+        update.put("read", false);
+
+        mockMvc.perform(patch(api + "/{id}", 1000)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(update)))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Book not found"));
     }
 }

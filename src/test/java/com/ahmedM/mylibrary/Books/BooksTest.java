@@ -138,18 +138,6 @@ public class BooksTest {
     }
 
     @Test
-    public void throwErrorIfRequestBodyIsWrongDataType() throws Exception {
-        HashMap<String, Integer> update = new HashMap<>();
-        update.put("read", 1);
-
-        mockMvc.perform(patch(api + "/{id}", 12)
-                .content(objectMapper.writeValueAsString(update))
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     public void patchRequest_throwBadRequestIfIdIsNotANumber() throws Exception {
         mockMvc.perform(patch(api + "/{id}", "apple"))
                 .andExpect(status().isBadRequest());

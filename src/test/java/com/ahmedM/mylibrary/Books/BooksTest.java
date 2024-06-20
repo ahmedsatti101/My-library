@@ -79,6 +79,7 @@ public class BooksTest {
         assertFalse(object.getBoolean("read"));
         assertEquals("A dark vision of the future.", object.getString("description"));
         assertEquals("Jane Doe", object.getString("author"));
+        assertEquals("Dystopian", object.getString("genre"));
     }
 
     @Test

@@ -9,8 +9,9 @@ public class BookDTO {
     private int genreId;
     private boolean read;
     private String author;
+    private String genre;
 
-    public BookDTO(int bookId, String title, String cover, String description, int authorId, int genreId, boolean read, String author) {
+    public BookDTO(int bookId, String title, String cover, String description, int authorId, int genreId, boolean read, String author, String genre) {
         this.bookId = bookId;
         this.title = title;
         this.cover = cover;
@@ -19,6 +20,7 @@ public class BookDTO {
         this.genreId = genreId;
         this.read = read;
         this.author = author;
+        this.genre = genre;
     }
 
     public int getBookId() {
@@ -83,5 +85,13 @@ public class BookDTO {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }

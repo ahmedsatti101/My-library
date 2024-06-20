@@ -32,7 +32,8 @@ public class BooksService {
                 (int) row[2],       // authorId
                 (int) row[3],       // genreId
                 (boolean) row[5],   // is_read
-                (String) row[7]     // author
+                (String) row[7],     // author
+                (String) row[8]
         );
         return Optional.of(bookDTO);
     }

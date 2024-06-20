@@ -1,7 +1,9 @@
 package com.ahmedM.mylibrary.Books;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -14,21 +16,25 @@ public class BooksService {
         return booksRepository.findAll();
     }
 
-    public Optional<Books> findBookById(int id) {
-        List<Object[]> results = booksRepository.findByAuthorId(id);
+    public Optional<BookDTO> findBookById(int id) {
+        List<Object[]> result = booksRepository.findByAuthorId(id);
 
-        for (Object[] row : results) {
-            int bookId = (int) row[0];
-            String title = (String) row[1];
-            String cover = (String) row[2];
-            boolean isRead = (boolean) row[3];
-            String description = (String) row[4];
-            String author = (String) row[5];
-
-            System.out.printf("Book ID: %d, Title: %s, Cover: %s, Is Read: %b, Description: %s, Author: %s%n",
-                    bookId, title, cover, isRead, description, author);
+        if (result.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
         }
-        return booksRepository.findById(id);
+
+        Object[] row = result.getFirst();
+        BookDTO bookDTO = new BookDTO(
+                (int) row[0],
+                (String) row[1],    // title
+                (String) row[4],    // cover
+                (String) row[6],    // description
+                (int) row[2],       // authorId
+                (int) row[3],       // genreId
+                (boolean) row[5],   // is_read
+                (String) row[7]     // author
+        );
+        return Optional.of(bookDTO);
     }
 
     public Books updateIsRead(int id, Books book) {

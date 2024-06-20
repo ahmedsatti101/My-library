@@ -1,7 +1,7 @@
 package com.ahmedM.mylibrary.Books;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,17 +21,17 @@ public class BooksController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Books> getBookById(@PathVariable int id) {
-        if (booksService.findBookById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
-        }
-        return booksService.findBookById(id);
+    public ResponseEntity<BookDTO> getBookById(@PathVariable int id) {
+        Optional<BookDTO> bookDTO = booksService.findBookById(id);
+
+        return bookDTO.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public Books updateBook(@RequestBody Books books, @PathVariable int id) {
+    public BookDTO updateBook(@RequestBody Books books, @PathVariable int id) {
         if (booksService.findBookById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
         }

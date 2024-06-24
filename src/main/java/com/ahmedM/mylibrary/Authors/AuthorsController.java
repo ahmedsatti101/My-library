@@ -25,8 +25,12 @@ public class AuthorsController {
     })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Authors> getAllAuthors() {
-        return authorsService.getAll();
+    public List<Authors> getAllAuthors(@RequestParam(value = "limit", defaultValue = "10") int limit, @RequestParam(value = "p", defaultValue = "0") int p) {
+        if (authorsService.getAll(limit, p).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return authorsService.getAll(limit, p);
     }
 
     @Tag(name = "Authors endpoints")

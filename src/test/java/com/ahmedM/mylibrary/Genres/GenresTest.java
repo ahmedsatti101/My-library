@@ -46,7 +46,7 @@ public class GenresTest {
     public void getAllGenres() {
         List<Genres> genres = restTemplate.getForObject(api, List.class);
         assertNotNull(genres);
-        assertEquals(40, genres.size());
+        assertEquals(10, genres.size());
     }
 
     @Test
@@ -70,5 +70,23 @@ public class GenresTest {
     public void throwNotFoundIfIdIsNotCorrect() throws Exception {
         mockMvc.perform(get(api+"/{id}", "banana"))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void throwBadRequestIfLimitIsNotANumber() throws Exception {
+        mockMvc.perform(get(api + "?limit=banana"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void throwBadRequestIfPageIsNotANumber() throws Exception {
+        mockMvc.perform(get(api + "?p=apple"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void throwNotFoundIfContentNotFoundOnPage() throws Exception {
+        mockMvc.perform(get(api + "?p=100"))
+                .andExpect(status().isNotFound());
     }
 }

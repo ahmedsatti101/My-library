@@ -26,8 +26,12 @@ public class GenresController {
     })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Genres> findAllGenres() {
-        return genresService.getAllGenres();
+    public List<Genres> findAllGenres(@RequestParam(value = "limit", defaultValue = "10") int limit, @RequestParam(value = "p", defaultValue = "0") int p) {
+        if (genresService.getAllGenres(limit, p).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return genresService.getAllGenres(limit, p);
     }
 
     @Tag(name = "Genres endpoints")

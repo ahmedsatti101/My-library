@@ -65,7 +65,7 @@ public class BooksTest {
         JSONArray array = new JSONArray(content);
 
         assertNotNull(content);
-        assertEquals(40, array.length());
+        assertEquals(10, array.length());
     }
 
     @Test

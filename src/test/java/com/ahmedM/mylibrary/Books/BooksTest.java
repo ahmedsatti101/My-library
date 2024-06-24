@@ -172,27 +172,21 @@ public class BooksTest {
 
     @Test
     public void sortByIsRead_OrderInDescendingOrder() {
-        // Arrange
         String column = "isRead";
         String order = "desc";
 
-        // Create a sample list of books to be returned by the mock repository
         List<Books> mockBooksList = new ArrayList<>();
         mockBooksList.add(new Books(1, "Book 1", "", true, "Book 1 description", 15, 2));
         mockBooksList.add(new Books(2, "Book 2", "", false, "Book 2 description", 12, 9));
 
-        // Mock the repository's findAll method
         when(booksRepository.findAll(Sort.by(Sort.Direction.DESC, column))).thenReturn(mockBooksList);
 
-        // Act
         List<Books> result = booksService.findAllBooks(column, order);
 
-        // Assert
-        assertNotNull(result);  // Ensure the result is not null
-        assertEquals(2, result.size());  // Ensure the size of the result list is as expected
-        assertEquals("Book 1", result.getFirst().getTitle());  // Check the content of the result list
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Book 1", result.getFirst().getTitle());
 
-        // Verify that the repository's findAll method was called with the correct parameters
         verify(booksRepository, times(1)).findAll(Sort.by(Sort.Direction.DESC, column));
     }
 
@@ -204,7 +198,7 @@ public class BooksTest {
     }
 
     @Test
-    public void returnNotFoundIfGivenWrongOrderQuery() throws Exception {
+    public void returnBadRequestIfGivenWrongOrderQuery() throws Exception {
         mockMvc.perform(get(api + "?order=banana"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Invalid order by query"));

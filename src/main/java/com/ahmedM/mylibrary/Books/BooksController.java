@@ -24,7 +24,9 @@ public class BooksController {
     @Tag(name = "Books endpoints")
     @Operation(summary = "Get all books")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json")})
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", description = "Invalid order by query", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Invalid sort by query", content = @Content)
     })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

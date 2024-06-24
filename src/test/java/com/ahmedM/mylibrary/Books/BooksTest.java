@@ -3,17 +3,23 @@ package com.ahmedM.mylibrary.Books;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.*;
 import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.*;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -32,6 +38,12 @@ public class BooksTest {
     private ObjectMapper objectMapper;
 
     private String api = "http://localhost";
+
+    @InjectMocks
+    BooksService booksService;
+
+    @Mock
+    BooksRepository booksRepository;
 
     @BeforeEach
     public void setUp() {
@@ -156,5 +168,39 @@ public class BooksTest {
                 .content(objectMapper.writeValueAsString(update)))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string("Book not found"));
+    }
+
+    @Test
+    public void sortByIsRead_OrderInDescendingOrder() {
+        String column = "isRead";
+        String order = "desc";
+
+        List<Books> mockBooksList = new ArrayList<>();
+        mockBooksList.add(new Books(1, "Book 1", "", true, "Book 1 description", 15, 2));
+        mockBooksList.add(new Books(2, "Book 2", "", false, "Book 2 description", 12, 9));
+
+        when(booksRepository.findAll(Sort.by(Sort.Direction.DESC, column))).thenReturn(mockBooksList);
+
+        List<Books> result = booksService.findAllBooks(column, order);
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Book 1", result.getFirst().getTitle());
+
+        verify(booksRepository, times(1)).findAll(Sort.by(Sort.Direction.DESC, column));
+    }
+
+    @Test
+    public void returnNotFoundIfGivenWrongColumnToSortBy() throws Exception {
+        mockMvc.perform(get(api + "?sort_by=apple"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Invalid sort by query"));
+    }
+
+    @Test
+    public void returnBadRequestIfGivenWrongOrderQuery() throws Exception {
+        mockMvc.perform(get(api + "?order=banana"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid order by query"));
     }
 }

@@ -1,6 +1,7 @@
 package com.ahmedM.mylibrary.Books;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,8 +13,9 @@ public class BooksService {
     @Autowired
     private BooksRepository booksRepository;
 
-    public List<Books> findAllBooks() {
-        return booksRepository.findAll();
+    public List<Books> findAllBooks(String column, String order) {
+        Sort.Direction direction = order.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        return booksRepository.findAll(Sort.by(direction, column));
     }
 
     public Optional<BookDTO> findBookById(int id) {

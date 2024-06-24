@@ -18,15 +18,28 @@ public class BooksController {
     @Autowired
     private BooksService booksService;
 
+    private static final List<String> validColumns = List.of("bookId", "title", "cover", "isRead", "description", "authorId", "genreId");
+    private static final List<String> validOrderByQueries = List.of("desc", "asc");
+
     @Tag(name = "Books endpoints")
     @Operation(summary = "Get all books")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json")})
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", description = "Invalid order by query", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Invalid sort by query", content = @Content)
     })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Books> getAllBooks() {
-        return booksService.findAllBooks();
+    public List<Books> getAllBooks(@RequestParam(value = "sort_by", defaultValue = "isRead") String column, @RequestParam(value = "order", defaultValue = "desc") String order) {
+        if (!validColumns.contains(column)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid sort by query");
+        }
+
+        if (!validOrderByQueries.contains(order)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid order by query");
+        }
+
+        return booksService.findAllBooks(column, order);
     }
 
     @Tag(name = "Books endpoints")

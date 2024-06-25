@@ -25,12 +25,12 @@ public class BooksController {
     @Operation(summary = "Get all books")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode = "400", description = "Invalid order by query", content = @Content),
-            @ApiResponse(responseCode = "404", description = "Invalid sort by query", content = @Content)
+            @ApiResponse(responseCode = "400"),
+            @ApiResponse(responseCode = "404")
     })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Books> getAllBooks(@RequestParam(value = "sort_by", defaultValue = "isRead") String column, @RequestParam(value = "order", defaultValue = "desc") String order) {
+    public List<Books> getAllBooks(@RequestParam(value = "sort_by", defaultValue = "isRead") String column, @RequestParam(value = "order", defaultValue = "desc") String order, @RequestParam(value = "limit", defaultValue = "10") int limit, @RequestParam(value = "p", defaultValue = "0") int p) {
         if (!validColumns.contains(column)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid sort by query");
         }
@@ -39,7 +39,11 @@ public class BooksController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid order by query");
         }
 
-        return booksService.findAllBooks(column, order);
+        if (booksService.findAllBooks(column, order, limit, p).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return booksService.findAllBooks(column, order, limit, p);
     }
 
     @Tag(name = "Books endpoints")

@@ -3,12 +3,14 @@ package com.ahmedM.mylibrary.Books;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.*;
 import org.junit.jupiter.api.*;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -39,9 +41,6 @@ public class BooksTest {
 
     private String api = "http://localhost";
 
-    @InjectMocks
-    BooksService booksService;
-
     @Mock
     BooksRepository booksRepository;
 
@@ -65,7 +64,7 @@ public class BooksTest {
         JSONArray array = new JSONArray(content);
 
         assertNotNull(content);
-        assertEquals(40, array.length());
+        assertEquals(10, array.length());
     }
 
     @Test
@@ -174,20 +173,25 @@ public class BooksTest {
     public void sortByIsRead_OrderInDescendingOrder() {
         String column = "isRead";
         String order = "desc";
+        int limit = 10;
+        int p = 0;
 
         List<Books> mockBooksList = new ArrayList<>();
         mockBooksList.add(new Books(1, "Book 1", "", true, "Book 1 description", 15, 2));
         mockBooksList.add(new Books(2, "Book 2", "", false, "Book 2 description", 12, 9));
 
-        when(booksRepository.findAll(Sort.by(Sort.Direction.DESC, column))).thenReturn(mockBooksList);
+        Page<Books> books = new PageImpl<>(mockBooksList);
 
-        List<Books> result = booksService.findAllBooks(column, order);
+        PageRequest pageRequest = PageRequest.of(p, limit, Sort.by(order, column));
 
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertEquals("Book 1", result.getFirst().getTitle());
+        when(booksRepository.findAll(pageRequest)).thenReturn(books);
 
-        verify(booksRepository, times(1)).findAll(Sort.by(Sort.Direction.DESC, column));
+        Page<Books> booksPage = booksRepository.findAll(pageRequest);
+
+        assertNotNull(booksPage.getContent());
+        assertEquals(2, booksPage.getContent().size());
+
+        verify(booksRepository, times(1)).findAll(pageRequest);
     }
 
     @Test
@@ -202,5 +206,23 @@ public class BooksTest {
         mockMvc.perform(get(api + "?order=banana"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Invalid order by query"));
+    }
+
+    @Test
+    public void throwBadRequestIfLimitIsNotANumber() throws Exception {
+        mockMvc.perform(get(api + "?limit=not-a-number"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void throwBadRequestIfPageIsNotANumber() throws Exception {
+        mockMvc.perform(get(api + "?p=apple"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void throwNotFoundIfContentNotFoundOnPage() throws Exception {
+        mockMvc.perform(get(api + "?p=100"))
+                .andExpect(status().isNotFound());
     }
 }

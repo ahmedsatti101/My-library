@@ -8,7 +8,7 @@ CREATE TABLE genres (
 );
 
 CREATE TABLE authors (
-    author_id SERIAL PRIMARY KEY,
+    author_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(250) NOT NULL,
     avatar VARCHAR(250)
 );
